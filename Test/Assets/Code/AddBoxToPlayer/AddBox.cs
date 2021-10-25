@@ -6,22 +6,35 @@ namespace Code.AddBoxToPlayer
 {
     public class AddBox
     {
-        public List<GameObject> _box;
+        public List<GameObject> _boxListObj;
         private Transform _playerTransform;
-        public AddBox(List<GameObject> box)
+        private GameObject _boxes;
+        private PlayerView _playerView;
+        private Vector3 _upVector3;
+        private int _count;
+        public AddBox(PlayerView playerView)
         {
-            _box = box;
+            _playerView = playerView;
+            _boxListObj = new List<GameObject>();
+            _boxes = Resources.Load("Cube") as GameObject;
+            _upVector3 = Vector3.up;
+            _count = 0;
         }
-        public void AddBoxToPlayer(PlayerView playerView)
+        public void AddBoxToPlayer(GameObject box)
         {
-            var box = Resources.Load("Cube") as GameObject;
-            var gameObject = GameObject.Instantiate(box);
-            gameObject.transform.SetParent(playerView.transform);
-            gameObject.transform.position = playerView.transform.position + Vector3.up;
-            gameObject.transform.rotation = Quaternion.identity;
-            //playerView.transform.localPosition = playerView.transform.position + Vector3.up;
-            Debug.Log(_playerTransform);
-            //_box.Add(prefab);
+            //var boxObj = GameObject.Instantiate(box, _playerView.transform.position, Quaternion.identity);
+            _boxListObj.Add(box);
+            _boxListObj[_count].transform.parent = _playerView.transform;
+            if (_count == 0)
+            {
+                _boxListObj[_count].transform.position = _playerView.transform.position + _upVector3;
+            }
+            else
+            {
+                _boxListObj[_count].transform.position = _boxListObj[_count - 1].transform.position + _upVector3;
+            }
+
+            _count++;
         }
     }
 }

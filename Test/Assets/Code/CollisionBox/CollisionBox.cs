@@ -8,23 +8,22 @@ namespace Code.CollisionBox
     {
         private AddBox _addBox;
         private PlayerView _playerView;
-        private Main _main;
+        private GameObject _boxObj;
+        private int i = 0;
 
-        public CollisionBox(PlayerView playerView, Main main)
+        public CollisionBox(PlayerView playerView,GameObject gameObject)
         {
-            _main = main;
-            _addBox = new AddBox(_main.BoxGameObject);
             _playerView = playerView;
+            _boxObj = gameObject;
+            _addBox = new AddBox(_playerView);
         }
 
-        public void OnCollisionBox(Collision collision)
+        public void OnCollisionBox(GameObject gameObject)
         {
-            if (collision.gameObject.GetComponent<Enemy>())
+            if (gameObject.CompareTag("Cube"))
             {
-                _addBox._box.Add(collision.gameObject);
-                _addBox.AddBoxToPlayer(_playerView);
-                //Object.Destroy(collision.gameObject);
-                collision.gameObject.SetActive(false);
+                //GameObject.Destroy(enemy.gameObject);
+                _addBox.AddBoxToPlayer(gameObject.gameObject);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.AddBoxToPlayer;
 using Code.Player;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace Code
     {
         [SerializeField] private PlayerSO _playerSo;
         [SerializeField] private List<GameObject> _boxGameObject;
-        public List<GameObject> BoxGameObject => _boxGameObject;
+        [SerializeField] private GameObject _boxObj;
+        [SerializeField] private GameObject _tempCube;
 
         private CollisionBox.CollisionBox _collisionBox;
         private PlayerData _playerData;
@@ -23,8 +25,8 @@ namespace Code
             _playerData = new PlayerData(_playerSo);
             _playerView = FindObjectOfType<PlayerView>();
             _playerController = new PlayerController(_playerView, _playerSo);
-            _collisionBox = new CollisionBox.CollisionBox(_playerView, this);
-            _addBox = new AddBox(_boxGameObject);
+            _collisionBox = new CollisionBox.CollisionBox(_playerView, _boxObj);
+            _addBox = new AddBox(_playerView); 
         }
 
         private void FixedUpdate()
@@ -32,9 +34,13 @@ namespace Code
             _playerController.Move(_playerData.Speed, _playerView.PlayerRigidbody);
         }
 
-        public void OnCollisionEnter(Collision other)
-        {
-            _collisionBox.OnCollisionBox(other);
+        public void OnCollisionEnter(Collision collision)
+        { 
+            if (collision.gameObject.TryGetComponent(out Enemy enemy) && _tempCube != collision.gameObject)
+            {
+                _tempCube = collision.gameObject;
+                _collisionBox.OnCollisionBox(enemy.gameObject);
+            }
         }
     }
 }
