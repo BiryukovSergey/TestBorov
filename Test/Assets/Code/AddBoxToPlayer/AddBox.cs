@@ -7,7 +7,6 @@ namespace Code.AddBoxToPlayer
     public class AddBox
     {
         public List<GameObject> _boxListObj;
-        private Transform _playerTransform;
         private GameObject _boxes;
         private PlayerView _playerView;
         private Vector3 _upVector3;
@@ -27,11 +26,16 @@ namespace Code.AddBoxToPlayer
             _boxListObj[_count].transform.parent = _playerView.transform;
             if (_count == 0)
             {
-                _boxListObj[_count].transform.position = _playerView.transform.position + _upVector3;
+                //_boxListObj[_count].transform.position = _playerView.transform.position + _upVector3;
+                _boxListObj[_count].transform.position = _playerView.transform.position + Vector3.down;
+                _playerView.transform.position = _boxListObj[_count].transform.position + _upVector3*2;
+                
             }
             else
             {
-                _boxListObj[_count].transform.position = _boxListObj[_count - 1].transform.position + _upVector3;
+                _boxListObj[_count].transform.position = _boxListObj[_count - 1].transform.position - Vector3.up;
+                _playerView.transform.position +=  _upVector3;
+                //_boxListObj[_count].transform.position = _boxListObj[_count - 1].transform.position + _upVector3;
             }
 
             _count++;

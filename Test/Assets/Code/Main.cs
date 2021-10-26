@@ -10,6 +10,7 @@ namespace Code
     {
         [SerializeField] private PlayerSO _playerSo;
         [SerializeField] private List<GameObject> _boxGameObject;
+        [SerializeField] private GameObject _cubeCollision;
         [SerializeField] private GameObject _boxObj;
         [SerializeField] private GameObject _tempCube;
 
@@ -39,7 +40,7 @@ namespace Code
             if (collision.gameObject.TryGetComponent(out Enemy enemy) && _tempCube != collision.gameObject)
             {
                 _tempCube = collision.gameObject;
-                _collisionBox.OnCollisionBox(enemy.gameObject);
+                _collisionBox.OnCollisionBox(enemy.gameObject,_cubeCollision);
             }
         }
     }

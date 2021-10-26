@@ -18,12 +18,12 @@ namespace Code.CollisionBox
             _addBox = new AddBox(_playerView);
         }
 
-        public void OnCollisionBox(GameObject gameObject)
+        public void OnCollisionBox(GameObject player,GameObject cube)
         {
-            if (gameObject.CompareTag("Cube"))
+            if (player.CompareTag("Cube") || cube.CompareTag("Cube"))
             {
                 //GameObject.Destroy(enemy.gameObject);
-                _addBox.AddBoxToPlayer(gameObject.gameObject);
+                _addBox.AddBoxToPlayer(player.gameObject);
             }
         }
     }
