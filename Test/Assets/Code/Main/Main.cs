@@ -23,6 +23,7 @@ namespace Code
 
         private void Awake()
         {
+            Time.timeScale = 0;
             _playerView = FindObjectOfType<PlayerView>();
             _addBox = new AddBox(_playerView);
         }
