@@ -11,18 +11,17 @@ namespace Code.CollisionBox
         private GameObject _boxObj;
         private int i = 0;
 
-        public CollisionBox(PlayerView playerView,GameObject gameObject)
+        public CollisionBox(PlayerView playerView, GameObject gameObject)
         {
             _playerView = playerView;
             _boxObj = gameObject;
             _addBox = new AddBox(_playerView);
         }
 
-        public void OnCollisionBox(GameObject player,GameObject cube)
+        public void OnCollisionBox(GameObject player, GameObject cube)
         {
             if (player.CompareTag("Cube") || cube.CompareTag("Cube"))
             {
-                //GameObject.Destroy(enemy.gameObject);
                 _addBox.AddBoxToPlayer(player.gameObject);
             }
         }
