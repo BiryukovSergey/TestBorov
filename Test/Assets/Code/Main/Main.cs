@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Code.AddBoxToPlayer;
+﻿using Code.AddBoxToPlayer;
 using Code.Player;
-using Code.SubtractingCubes;
 using UnityEngine;
 
 namespace Code
@@ -32,7 +29,7 @@ namespace Code
         {
             _playerData = new PlayerData(_playerSo);
             _playerController = new PlayerController(_playerView, _playerSo);
-            _collisionBox = new CollisionBox.CollisionBox(_playerView, _boxObj);
+            _collisionBox = new CollisionBox.CollisionBox(_playerView);
         }
         private void FixedUpdate()
         {

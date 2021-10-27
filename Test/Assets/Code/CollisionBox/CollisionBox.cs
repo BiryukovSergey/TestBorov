@@ -8,13 +8,11 @@ namespace Code.CollisionBox
     {
         private AddBox _addBox;
         private PlayerView _playerView;
-        private GameObject _boxObj;
         private int i = 0;
 
-        public CollisionBox(PlayerView playerView, GameObject gameObject)
+        public CollisionBox(PlayerView playerView)
         {
             _playerView = playerView;
-            _boxObj = gameObject;
             _addBox = new AddBox(_playerView);
         }
 

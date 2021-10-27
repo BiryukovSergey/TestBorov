@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Code
+﻿namespace Code
 {
     public static class PlayerMoveAxes
     {
